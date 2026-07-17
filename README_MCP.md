@@ -31,9 +31,8 @@ npm run start:mcp
 
 ## Environment variables
 
-- `ODATA_BASE_URL` - Full base URL of the SAP OData service (without trailing slash)
-- `ODATA_USERNAME` - Basic auth username for the SAP backend
-- `ODATA_PASSWORD` - Basic auth password for the SAP backend
+- `SAP_API_URL` - Full base URL of the SAP OData service (without trailing slash)
+- 'SAP_API_KEY' - API key from BusinessHub to access sandbox system
 
 ## Development
 
