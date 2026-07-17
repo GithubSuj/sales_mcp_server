@@ -42,7 +42,7 @@ npm run start:mcp
 ## Architecture Overview
 The system is split into three core layers: your desktop AI client, an intermediate bridging server running securely on SAP Business Technology Platform (BTP), and your main SAP backend data source.
 
-![Architecture Diagram](./images/SalesOrdeMCPArch.jpg)
+![Architecture Diagram](./images/SalesOrdeMCPArchImage.png)
 
 [ Claude Desktop App ] (Local PC)
        │
