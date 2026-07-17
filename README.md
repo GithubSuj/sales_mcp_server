@@ -44,11 +44,29 @@ The system is split into three core layers: your desktop AI client, an intermedi
 
 ![Architecture Diagram](./images/SalesOrdeMCPArch.jpg)
 
+[ Claude Desktop App ] (Local PC)
+       │
+       ▼ (Configured via local standard I/O file)
+[ SAP CAP MCP Server ] (Hosted on SAP BTP Cloud Foundry)
+       │
+       ▼ (Uses SAP Cloud SDK & OData Protocol via SAP_API_URL)
+[ SAP Sales Order API ] (Backend System)
+
 1. Claude Desktop App (The AI Client): Reads a local configuration file on your machine. When you ask it a sales order question, it uses standard inputs/outputs to securely query the bridge server.
 
 2. SAP CAP MCP Server (The Bridge): Runs on SAP BTP Cloud Foundry. It exposes a secure POST /mcp/call API endpoint via server.js that catches commands from the AI.
 
 3. SAP Cloud OData Client SDK: Found inside the core application files, it translates the AI's requests into official SAP-compliant language to safely process data over your secure SAP_API_URL.
+
+## Core Libraries & Dependencies
+
+This project relies on two major ecosystems to seamlessly handle both the AI protocol definitions and the secure SAP enterprise connections:
+
+🤖 Model Context Protocol (@modelcontextprotocol/sdk)
+This official SDK from Anthropic implements the architectural standard that allows LLMs to interact with external data sources and tools. It defines the schemas, tools, and protocols used in index.ts to expose the read_sales_order and create_sales_order capabilities to Claude in a standardized format.
+
+☁️ SAP Cloud SDK (@sap-cloud-sdk/core)
+SAP’s official software development kit for JavaScript/TypeScript. Utilized heavily inside OdataClient.ts, it automatically abstracts complex enterprise connectivity tasks like managing destinations, payload serialization, and handling authentication headers when interacting with the OData V2/V4 Sales Order API.
 
 ## Linking Claude to the Server
 To point your desktop client to your BTP deployment, add the server setup details to your local Claude configuration profile.
